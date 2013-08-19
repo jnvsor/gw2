@@ -129,7 +129,7 @@ void print_csv_data(xmlNodePtr cur,xmlDocPtr doc, regex_t datereg, regex_t trimr
   regmatch_t datematch[4];
   regmatch_t trimmatch[1];
   
-	printf("Account,Achievement Points,Day,Month,Year\n");
+  printf("Account,Achievement Points,Day,Month,Year\n");
   
   while(cur != NULL){
     g = get_guildie(cur,doc);
@@ -177,26 +177,26 @@ int main(int argc, char * argv[]){
   
   xmlNodePtr cur = xmlDocGetRootElement(doc);
   if (cur == NULL) {
-		fprintf(stderr,"empty document\n");
-		xmlFreeDoc(doc);
-		return 1;
-	}
-	
-	if(xmlStrcmp(cur->name, (const xmlChar *) "tbody")){
-	  fprintf(stderr,"Wrong root element, expected tbody. Got %s\n",cur->name);
-	  return 1;
-	}
-	
-  regex_t datereg,trimreg;
-	int reti = regcomp(&datereg, "([0-9]+)/([0-9]+)/([0-9]+)", REG_EXTENDED);
-	reti += regcomp(&trimreg, "[^[:space:]].+\\.[0-9]{4}", REG_EXTENDED);
-	if(reti){
-	  fprintf(stderr,"Couldn't compile regex\n");
-	  return 1;
-	}
-	
-	print_csv_data(cur,doc,datereg,trimreg);
+    fprintf(stderr,"empty document\n");
+    xmlFreeDoc(doc);
+    return 1;
+  }
   
-	xmlFreeDoc(doc);
+  if(xmlStrcmp(cur->name, (const xmlChar *) "tbody")){
+    fprintf(stderr,"Wrong root element, expected tbody. Got %s\n",cur->name);
+    return 1;
+  }
+  
+  regex_t datereg,trimreg;
+  int reti = regcomp(&datereg, "([0-9]+)/([0-9]+)/([0-9]+)", REG_EXTENDED);
+  reti += regcomp(&trimreg, "[^[:space:]].+\\.[0-9]{4}", REG_EXTENDED);
+  if(reti){
+    fprintf(stderr,"Couldn't compile regex\n");
+    return 1;
+  }
+  
+  print_csv_data(cur,doc,datereg,trimreg);
+  
+  xmlFreeDoc(doc);
   return 0;
 }
