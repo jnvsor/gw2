@@ -9,6 +9,10 @@ Replace with:
 
     \1,\2,\5,\4,\6
 
+Or in a terminal:
+
+    sed -ri 's/[0-9]+% \t(.+\.[0-9]{4}) \t([0-9]+)( [0-9]+)? Since ([0-9]+)\/([0-9]+)\/([0-9]+).+/\1,\2,\5,\4,\6/g' $filename
+
 Needless to say I'm a bit miffed at the simplicity of this method, given the work I put into my xml-parsing pattern-matching but I'm leaving the program here as it is for portfolio and/or in case anet "plugs the hole"
 
 gw2rip
