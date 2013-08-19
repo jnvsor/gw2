@@ -23,7 +23,7 @@ Go to http://leaderboards.guildwars2.com/en/na/achievements and log in. Filter b
 
 ####In IE####
 * Slap yourself
-* Download [firefox](http://www.mozilla.org/firefox) or [chrome](www.google.com/chrome‎)
+* Download [firefox](http://www.mozilla.org/firefox) or [chrome](http://www.google.com/chrome‎)
 * Follow above instructions
 
 
