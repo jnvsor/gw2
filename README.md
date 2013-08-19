@@ -3,7 +3,7 @@ Made obsolete in 5 hours flat by /u/nabarok at reddit.
 
 He [observed](http://www.reddit.com/r/Guildwars2/comments/1ko24h/i_wrote_a_program_that_gives_you_a_last_online/cbr0lzp) the requests the page's ajax made and noted they use a simple get parameter for the data. The end result is that you just stick `?pjax=1` on the end of the url, copy paste the result to a text file, and apply these regexes I made below.
 
-    [0-9]+% \t(.+\.[0-9]{4}) \t([0-9]+)( [0-9]+)? Since ([0-9]+)/([0-9]+)/([0-9]+).+
+    [0-9]+%\s+(.+\.[0-9]{4})\s+([0-9]+)( [0-9]+)? Since ([0-9]+)/([0-9]+)/([0-9]+).+
 
 Replace with:
 
@@ -11,7 +11,7 @@ Replace with:
 
 Or in a terminal:
 
-    sed -ri 's/[0-9]+% \t(.+\.[0-9]{4}) \t([0-9]+)( [0-9]+)? Since ([0-9]+)\/([0-9]+)\/([0-9]+).+/\1,\2,\5,\4,\6/g' $filename
+    sed -ri 's/[0-9]+%\s+(.+\.[0-9]{4})\s+([0-9]+)( [0-9]+)? Since ([0-9]+)\/([0-9]+)\/([0-9]+).+/\1,\2,\5,\4,\6/g' $filename
 
 Needless to say I'm a bit miffed at the simplicity of this method, given the work I put into my xml-parsing pattern-matching but I'm leaving the program here as it is for portfolio and/or in case anet "plugs the hole"
 
