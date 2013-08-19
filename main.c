@@ -96,18 +96,22 @@ guildie get_guildie(xmlNodePtr cur,xmlDocPtr doc){
   
   cur = cur->xmlChildrenNode;
   while(cur != NULL){
+  
     if(type(cur,"td")){
+    
       if(class(cur,"name")){
         g.name = (char *) xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
       }
       else if(class(cur,"achievements")){
         span = cur->xmlChildrenNode;
+        
         while(span != NULL){
           if(type(span,"span") && class(span,"hasAdditional")){
             g.score = get_score(span->xmlChildrenNode,doc);
             g.date = get_date(span->xmlChildrenNode,doc);
             break;
           }
+          
           span = span->next;
         }
       }
@@ -124,6 +128,8 @@ void print_csv_data(xmlNodePtr cur,xmlDocPtr doc, regex_t datereg, regex_t trimr
   int reti;
   regmatch_t datematch[4];
   regmatch_t trimmatch[1];
+  
+	printf("Account,Achievement Points,Day,Month,Year\n");
   
   while(cur != NULL){
     g = get_guildie(cur,doc);
@@ -188,8 +194,6 @@ int main(int argc, char * argv[]){
 	  fprintf(stderr,"Couldn't compile regex\n");
 	  return 1;
 	}
-	
-	printf("Account,Achievement Points,Day,Month,Year\n");
 	
 	print_csv_data(cur,doc,datereg,trimreg);
   
