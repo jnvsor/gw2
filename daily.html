@@ -1,0 +1,272 @@
+<html><head><style>
+	table {
+	max-width: 600px;
+	border-collapse: collapse;
+	font-size: 0.8em;
+	}
+	th, td {
+	border: 1px dotted #555;
+	border-width: 1px;
+	padding: 2px;
+	}
+	th {
+	text-align: center;
+	vertical-align: top;
+	color: #000;
+	padding: 3px 4px;
+	}
+	ul {
+	margin-bottom: 0;
+	}
+	table {
+	margin-bottom: 25px;
+	}
+	#dungeons th {
+	padding-left: 30px;
+	background: 1px 1px transparent no-repeat;
+	background-size: 24px 24px;
+	}
+	#dungeons th,
+	#dragonite th {
+	text-align: left;
+	}
+	#dungeons th:last-child {
+	text-align: center;
+	}
+	
+	#dungeons [for='tae'],
+	#dungeons [for='se2'],
+	#dungeons [for='hotw2'],
+	#dungeons [for='hotw3'] {
+	color: #F00;
+	}
+	
+	#dungeons #ac th {
+	background-image: url("http://wiki.guildwars2.com/images/b/b8/Ascalonian_Tear.png");
+	}
+	#dungeons #cm th {
+	background-image: url("http://wiki.guildwars2.com/images/d/d2/Seal_of_Beetletun.png");
+	}
+	#dungeons #ta th {
+	background-image: url("http://wiki.guildwars2.com/images/b/b6/Deadly_Bloom.png");
+	}
+	#dungeons #se th {
+	background-image: url("http://wiki.guildwars2.com/images/9/91/Manifesto_of_the_Moletariate.png");
+	}
+	#dungeons #cof th {
+	background-image: url("http://wiki.guildwars2.com/images/e/ec/Flame_Legion_Charr_Carving.png");
+	}
+	#dungeons #hotw th {
+	background-image: url("http://wiki.guildwars2.com/images/a/a7/Symbol_of_Koda.png");
+	}
+	#dungeons #coe th {
+	background-image: url("http://wiki.guildwars2.com/images/5/55/Knowledge_Crystal.png");
+	}
+	#dungeons #arah th {
+	background-image: url("http://wiki.guildwars2.com/images/b/ba/Shard_of_Zhaitan.png");
+	}
+	
+	</style><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+	  $( "input[type='button']" ).click(function(){
+	    $( "input[type='checkbox']" ).attr('checked', false);	
+	  });
+	});
+	
+	</script>
+	</head><body>
+	<h1>TODO list</h1>
+	
+<input type="button" value="Clear" />
+<table>
+<tr><th>General</th></tr>
+<tr><td><input type="checkbox" id="daily" /><label for="daily">Daily done</label></td></tr>
+<tr><td><input type="checkbox" id="quartz" /><label for="quartz">Home instance mined</label></td></tr>
+<tr><td><input type="checkbox" id="karka" /><label for="karka">Karka Queen killed</label></td></tr>
+</table>
+
+<table id="dragonite"><tr><th></th><th>Warrior</th><th>Guardian</th><th>Ranger</th><th>Thief</th><th>Engineer</th><th>Elementalist</th><th>Mesmer</th><th>Necro</th></tr>
+<tr>
+<th>Fire Shaman</th>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+</tr>
+<tr>
+<th>Golem</th>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+</tr>
+<tr>
+<th>Tequatl</th>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+</tr>
+<tr>
+<th>Shatterer</th>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+</tr>
+<tr>
+<th>Claw</th>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+</tr>
+<tr>
+<th>Lyssa</th>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+</tr>
+<tr>
+<th>Dwayna</th>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+</tr>
+<tr>
+<th>Melandru</th>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+</tr>
+<tr>
+<th>Grenth</th>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+<td><input type="checkbox"/></td>
+</tr>
+</table>
+
+<table id="dungeons"><tr><th colspan=4>Dungeons</th></tr>
+<tr id="ac">
+<th>AC</th>
+<td><input type="checkbox" id="ac1" /><label for="ac1">p1</label></td>
+<td><input type="checkbox" id="ac2"/><label for="ac2">p2</label></td>
+<td><input type="checkbox" id="ac3" /><label for="ac3">p3</label></td>
+</tr>
+<tr id="cm">
+<th>CM</th>
+<td><input type="checkbox" id="cm1" /><label for="cm1">p1</label></td>
+<td><input type="checkbox" id="cm2" /><label for="cm2">p2</label></td>
+<td><input type="checkbox" id="cm3" /><label for="cm3">p3</label></td>
+</tr>
+<tr id="ta">
+<th>TA</th>
+<td><input type="checkbox" id="tae" /><label for="ta2">Aetherpath</label></td>
+<td><input type="checkbox" id="ta1" /><label for="ta1">U</label></td>
+<td><input type="checkbox" id="ta3" /><label for="ta3">F/F</label></td>
+</tr>
+<tr id="se">
+<th>SE</th>
+<td><input type="checkbox" id="se1" /><label for="se1">p1</label></td>
+<td><input type="checkbox" id="se2" /><label for="se2">p2</label></td>
+<td><input type="checkbox" id="se3" /><label for="se3">p3</label></td>
+</tr>
+<tr id="cof">
+<th>CoF</th>
+<td><input type="checkbox" id="cof1" /><label for="cof1">p1</label></td>
+<td><input type="checkbox" id="cof2" /><label for="cof2">p2</label></td>
+<td><input type="checkbox" id="cof3" /><label for="cof3">p3</label></td>
+</tr>
+<tr id="hotw">
+<th>HotW</th>
+<td><input type="checkbox" id="hotw1" /><label for="hotw1">p1</label></td>
+<td><input type="checkbox" id="hotw2" /><label for="hotw2">p2</label></td>
+<td><input type="checkbox" id="hotw3" /><label for="hotw3">p3</label></td>
+</tr>
+<tr id="coe">
+<th>CoE</th>
+<td><input type="checkbox" id="coe1" /><label for="coe1">p1</label></td>
+<td><input type="checkbox" id="coe2" /><label for="coe2">p2</label></td>
+<td><input type="checkbox" id="coe3" /><label for="coe3">p3</label></td>
+</tr>
+<tr id="arah">
+<th>Arah</th>
+<td><input type="checkbox" id="arah1" /><label for="arah1">p1</label></td>
+<td><input type="checkbox" id="arah2" /><label for="arah2">p2</label></td>
+<td><input type="checkbox" id="arah3" /><label for="arah3">p3</label></td>
+<td><input type="checkbox" id="arah4" /><label for="arah4">p4</label></td>
+</table>
+
+<table><tr><th colspan=2>Fractals</th></tr>
+<tr>
+<th>49</th>
+<td><input type="checkbox"/></td>
+</tr>
+<tr>
+<th>40</th>
+<td><input type="checkbox"/></td>
+</tr>
+</table>
+
+<table>
+<tr><th>Ori farm</th>
+<tr>
+<td><input type="checkbox" id="nonvic" /><label for="nonvic">Ranger</label></td></tr><tr>
+<td><input type="checkbox" id="zip" /><label for="zip">Guardian</label></td></tr><tr>
+<td><input type="checkbox" id="fal" /><label for="fal">Thief</label></td></tr><tr>
+<td><input type="checkbox" id="frac" /><label for="frac">Mesmer</label></td></tr><tr>
+</tr>
+</table>
+
+<table>
+<tr><th>Badges of Jumping</th>
+<tr>
+<td><input type="checkbox" id="badge-obby" /><label for="badge-obby">Obsidian Sanctum</label></td></tr>
+<td><input type="checkbox" id="badge-green" /><label for="badge-green">Green Borderlands</label></td></tr>
+<td><input type="checkbox" id="badge-red" /><label for="badge-red">Red Borderlands</label></td></tr>
+<td><input type="checkbox" id="badge-blue" /><label for="badge-blue">Blue Borderlands</label></td></tr>
+</table>
+
+</body>
