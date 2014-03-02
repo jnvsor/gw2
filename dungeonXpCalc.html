@@ -1,0 +1,375 @@
+<html>
+	<head>
+		<title>Relativity.3264's dungeon xp calculator</title>
+		<style type="text/css">
+			table th {
+			text-align: left;
+			}
+			
+			p.important {
+			color: #f00;
+			font-weight: bold;
+			}
+			
+			#bonusresult {
+			background: #ACF;
+			border: 1px solid #59F;
+			padding: 20px;
+			}
+			
+			#bonusresult>:first-child {
+			margin-top: 0;
+			}
+			
+			#bonusresult>:last-child {
+			margin-bottom: 0;
+			}
+			
+			/* xp bar color pallet
+			level indicator: 926808
+			bar full: d19600
+			bar background: 271513
+			bar crossbars: 000000
+			*/
+			
+			div.xpbar {
+			}
+			div.xpbar div.level {
+			background: #926808;
+			height: 18px;
+			width: 55px;
+			color: #FFF;
+			text-align: center;
+			float:left;
+			}
+			div.xpbar div.progress {
+			height: 16px;
+			border: 1px solid #000;
+			background: #271513;
+			width: 700px;
+			margin-left: 55px;
+			}
+			div.xpbar div.progress div.value {
+			background: #d19600;
+			height: 16px;
+			}
+			
+		</style>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script>
+			var xptable = [0,
+			2000,		2110,		2379,		2674,		2999,		3343,		3719,		4129,		4567,		5044,		// 1 - 10
+			5553,		6111,		6705,		7354,		8042,		8790,		9270,		9770,		10300,	10900,	// 11 - 20
+			11400,	12100,	12700,	13400,	14100,	14900,	15700,	16500,	17400,	18300,	// 21 - 30
+			19300,	20400,	21500,	22600,	23900,	25100,	26500,	27900,	29400,	31000,	// 31 - 40
+			32700,	34500,	36300,	38300,	40300,	42500,	44800,	47200,	49800,	52500,	// 41 - 50
+			55300,	58300,	61400,	64700,	68200,	71900,	75800,	79800,	84100,	88700,	// 51 - 60
+			93500,	98500,	104400,	109000,	115000,	122000,	129000,	135000,	142000,	150000,	// 61 - 70
+			158000,	167000,	176000,	185000,	195000,	205000,	217000,	228000,	241000,	254000,	// 71 - 80
+			];
+			
+			function notfilled(input,name){
+				if(input.val() == ""){
+					alert("You have to fill in " + name + "!");
+					return 1;
+				}
+			}
+			
+			function intCheck(input){
+				var intRegex = /^\d+$/;
+				
+				if(! intRegex.test(input.val()) ){
+					alert("\"" + input.val() + "\" is not a positive number!");
+					return 1;
+				}
+			}
+			
+			function floatCheck(input){
+				if(isNaN(input.val()-0)){
+					alert("\"" + input.val() + "\" is not a number!");
+					return 1;
+				}
+			}
+			
+			function levelCheck(input){
+				if(notfilled(input,"level") || intCheck(input)){
+					input.val("1");
+					return 1;
+				}
+				
+				if(input.val() > 80 || input.val() < 1){
+					alert("Level must be between 1 and 80");
+					input.val("1");
+					return 1;
+				}
+			}
+			
+			function xpCheck(input,maxxp){
+				if(notfilled(input,"xp") || intCheck(input)){
+					input.val("0");
+					return 1;
+				}
+				
+				if(input.val() >= maxxp){
+					alert("That's more xp than that level can have!");
+					input.val("0");
+					return 1;
+				}
+			}
+			
+			function targetCheck(input,level){
+				if(input.val() == ""){
+					return; // Eventually target level will not be only calc mode
+				}
+				
+				if(intCheck(input)){
+					input.val("");
+					return 1;
+				}
+				
+				if(input.val() > 80){
+					alert("Target must be 80 or below");
+					input.val("");
+					return 1;
+				} 
+				
+				if(input.val() <= level){
+					alert("Target level must be higher than starting level");
+					input.val("");
+					return 1;
+				}				
+			}
+			
+			
+			
+			
+			
+			
+			function dungeonRecurse(level,xp,target,additionalxp,gofording=false){
+				var currentLevel=level;
+				var currentXp=xp;
+				var runs=0;
+				var rewardxp = 0;
+				var couldBeBetter = false;
+				
+				while (currentLevel < target){
+					runs++;
+					
+					rewardxp = 0.7 * xptable[currentLevel];
+					rewardxp += additionalxp / 100 * xptable[currentLevel];
+										
+					currentXp = currentXp - -rewardxp;
+					
+					while(currentXp > xptable[Math.min(currentLevel,80)]){
+						currentXp -= xptable[Math.min(currentLevel,80)];
+						currentLevel++;
+					}
+					
+					// If it's close to a ding and gofording is set just ding
+					if(currentXp/xptable[currentLevel] > 0.98 && gofording){
+						currentXp = 0;
+						currentLevel++;
+					}
+				}
+				
+				return [currentLevel,currentXp,runs];
+			}
+			
+		
+			$(document).ready(function(){
+				
+				$("#go").click(function(){
+					
+					// Check that it's all filled in and numbers
+					if(levelCheck($("#level")) || xpCheck($("#xp"),xptable[$("#level").val()]) || targetCheck($("#target"),$("#level").val())){
+						return;
+					}
+					
+					if(notfilled($("#target"),"target level")){
+						$("#target").val("");
+						return;
+					}
+					
+					// Warn user if kill xp is too high
+					if($("#killxp").val() > 10){
+						alert("That's a LOT of xp per dungeon run, results may not be accurate.");
+					}
+					if($("#killxp").val() < 0){
+						alert("Kill xp must be 0 or greater!");
+						$("#killxp").val("");
+						return 1;
+					}
+					
+					var endvalues = dungeonRecurse($("#level").val(),$("#xp").val(),$("#target").val(),$("#killxp").val());
+					
+					var level = endvalues[0]
+					var xp = endvalues[1]
+					var runs = endvalues[2];
+					
+					var result = "<p>It will take " + runs + " dungeon completions to reach level ";
+					result += Math.min(level,80);
+					if(level > 80){
+					 result += " with " + (level-80) + " extra skill points";
+					}
+					result += " from level " + $("#level").val() + " with " + $("#xp").val() + " xp.</p>";
+					
+					result += "<p>You will be " + Math.floor(xp/xptable[$("#target").val()]*100);
+					result += "% of the way to your next level.</p>";
+					
+					$("#outputxpbar .level").text(level);
+					$("#outputxpbar .progress .value").css("width",(xp/xptable[level])*700);
+					$("#result").html(result);
+					$("#outputxpbar").show();
+					
+					
+					
+					
+					
+					result = "";
+					
+					var endvalues2 = dungeonRecurse($("#level").val(),$("#xp").val(),$("#target").val(),$("#killxp").val(),true);
+					
+					var level = endvalues2[0]
+					var xp = endvalues2[1]
+					var runs = endvalues2[2];
+					
+					// If a few extra kills could improve it
+					if(level != endvalues[0] || runs != endvalues[2]){
+						result += "<p>At some point you were within 2% of hitting the next level, a few kills";
+						result += " would bump you up and make the next dungeon run's xp reward improve.</p>";
+						result += "<p>If you took this oppertunity:</p><ul>";
+						
+						if(level != endvalues[0]){
+							result += "<li>You would reach level" + Math.min(level,80);
+							if(level > 80){
+							 result += " with " + (level-80) + " extra skill points.</li>";
+							}
+						}
+						
+						if(runs != endvalues[2]){
+							result += "<li>You would only need " + runs + " dungeon completions.</li>";
+						}
+					
+						if(xp != endvalues[1]){
+							result += "<li>You would be " + Math.floor(xp/xptable[$("#target").val()]*100);
+							result += "% of the way to your next level.</li>";
+						}
+						
+						result += "</ul>";
+						
+						$("#bonusxpbar .level").text(level);
+						$("#bonusxpbar .progress .value").css("width",(xp/xptable[level])*700);
+						$("#bonusresult").html(result);
+						
+						$("#bonusxpbar").show();
+						$("#bonusresult").show();
+					}else{
+						$("#bonusresult").hide();
+						$("#bonusxpbar").hide();
+					}
+					
+					
+				}); // go.click()
+				
+				$("#level").change(function(){
+					levelCheck($(this));
+					$("#inputxpbar .level div").text($(this).val());
+					$("#xp").change();
+					$("#target").change();
+				});
+				
+				$("#xp").change(function(){
+					xpCheck($(this),xptable[$("#level").val()]);
+					$("#inputxpbar .progress .value").css("width",($(this).val()/xptable[$("#level").val()])*700);
+				});
+				
+				$("#target").change(function(){
+					targetCheck($(this),$("#level").val());
+				});
+				
+				$("#inputxpbar .level div").click(function(){
+					$(this).siblings().val(
+						$(this).hide().text()
+					).show().select();
+				});
+				
+				$("#inputxpbar .level input").blur(function(){
+					levelCheck($(this));
+					$(this).siblings().text(
+						$(this).hide().val()
+					).show();
+					$("#level").val($(this).val());
+					$("#level").change()
+				});
+				
+				$("#level").change();
+				$("#inputxpbar .level input").hide();
+				$("#outputxpbar").hide();
+				$("#bonusxpbar").hide();
+				$("#bonusresult").hide();
+				
+			}); // ready()
+		</script>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<th>Your level</th>
+				<td>
+					<input id="level" type="text" placeholder="Level" value="1"/>
+				</td>
+			</tr>
+			<tr>
+				<th>Your xp this level</th>
+				<td>
+					<input id="xp" type="text" placeholder="XP" value="0" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2>
+					<div id="inputxpbar" class="xpbar">
+						<div class="level">
+							<input type="text" size=2 />
+							<div>1</div>
+						</div>
+						<div class="progress">
+							<div class="value"></div>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>Level you want</th>
+				<td>
+					<input id="target" type="text" placeholder="Target level" />
+				</td>
+			</tr>
+			<tr>
+				<th>Kill XP per dungeon</th>
+				<td>
+					<input id="killxp" type="text"/>%
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input id="go" type="submit" value="Go" />
+				</td>
+			</tr>
+		</table>
+		<div id="result"></div>
+		<div id="outputxpbar" class="xpbar">
+			<div class="level">80</div>
+			<div class="progress">
+				<div class="value"></div>
+			</div>
+		</div>
+		<div id="bonusresult"></div>
+		<div id="bonusxpbar" class="xpbar">
+			<div class="level">80</div>
+			<div class="progress">
+				<div class="value"></div>
+			</div>
+		</div>
+	</body>
+</html>
