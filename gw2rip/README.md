@@ -1,5 +1,5 @@
 ##Obsolete##
-Made obsolete in 5 hours flat by /u/nabarok at reddit.
+The feature from this program was implemented in the April 15 2014 patch to Guild Wars 2, and was made obsolete before then by /u/nabarok at reddit.
 
 He [observed](http://www.reddit.com/r/Guildwars2/comments/1ko24h/i_wrote_a_program_that_gives_you_a_last_online/cbr0lzp) the requests the page's ajax made and noted they use a simple get parameter for the data. The end result is that you just stick `?pjax=1` on the end of the url, copy paste the result to a text file, and apply these regexes I made below.
 
